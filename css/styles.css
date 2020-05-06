@@ -1,0 +1,21 @@
+body {
+    padding:2%;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: #fff;
+    background-color: #222;
+
+}
+
+button {
+    width: 150px;
+    padding: 1% 0% 1% 0%;
+    border-radius: 2px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    font-weight: 700;
+}
+
+button:hover {
+    cursor: pointer;
+}

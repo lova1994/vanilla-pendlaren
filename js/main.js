@@ -51,6 +51,36 @@ async function nearStops(currentLocation) {
     }
 }
 
+async function departures() {
+
+
+    console.log("departures ran")
+    const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
+    const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
+    // let latitude = 59.5197344;
+    // let longitude = 17.8927437;
+
+    // let latitude = currentLocation.latitude;
+    // console.log(latitude)
+
+    // let longitude = currentLocation.longitude;
+    // console.log(longitude)
+
+    let id = "740066787";
+    
+    let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`
+
+    try {
+        let resp = await fetch(URL);
+        let departures = await resp.json();
+        console.log(departures)
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+departures()
 
 
 

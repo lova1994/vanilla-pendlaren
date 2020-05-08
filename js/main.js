@@ -24,19 +24,19 @@ async function nearStops(currentLocation) {
     let latitude = currentLocation.latitude;
     let longitude = currentLocation.longitude;
     let URL = `${baseUrl}key=${apiKey}&originCoordLat=${latitude}&originCoordLong=${longitude}&format=json`
+    let id = 740000782;
+
 
     try {
         let resp = await fetch(URL);
         let stops = await resp.json();
         let i;
         console.log("Hämtar hållplatser...");
-        let firstStop = stops.StopLocation[0].id;
-        console.log("Första hållplatsen är " + firstStop)
-        departures(firstStop)
+    
 
         // let id = stops.StopLocation[0].id;
         // console.log("id " + id)
-        // departures(id) // vald hållplats ska skickas in här till departures
+        departures(id) // vald hållplats ska skickas in här till departures
 
         for (i=0; i < 10; i++) {
             let id = stops.StopLocation[i].id;
@@ -53,12 +53,12 @@ async function nearStops(currentLocation) {
 }
 
 
-async function departures() {
+async function departures(id) {
     console.log("Hämtar avgång")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
     // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&format=json
-    let id = 740000782;
+    
     let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
     let el =  document.getElementById('departures');
     try {

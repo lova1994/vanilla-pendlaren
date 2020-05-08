@@ -1,7 +1,8 @@
-
 var x = document.getElementById("show-position");
 
 function getLocation() {
+    console.log("Hämtar din position...")
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -14,8 +15,9 @@ function getLocation() {
   }
 }
 
-
 async function nearStops(currentLocation) {
+
+    console.log("Hittar närmaste hållplatser...")
     const apiKey = '32808697-8cef-4cdc-81a3-477f899fd378'
     const baseUrl = 'https://api.resrobot.se/v2/location.nearbystops?';
 
@@ -27,18 +29,22 @@ async function nearStops(currentLocation) {
         let resp = await fetch(URL);
         let stops = await resp.json();
         let i;
-        console.log(stops);
-        console.log(stops.StopLocation[0]);
+        console.log("Hämtar hållplatser...");
+        let firstStop = stops.StopLocation[0].id;
+        console.log("Första hållplatsen är " + firstStop)
+        departures(firstStop)
 
-        let id = stops.StopLocation[0].id;
-        console.log("id " + id)
-
-
-        departures(id) // vald hållplats ska skickas in här till departures
-
+        // let id = stops.StopLocation[0].id;
+        // console.log("id " + id)
+        // departures(id) // vald hållplats ska skickas in här till departures
 
         for (i=0; i < 10; i++) {
-            console.log(stops.StopLocation[i].name) 
+            let id = stops.StopLocation[i].id;
+            let name = stops.StopLocation[i].name;
+            console.log("Hållplats-id:" + id)
+            console.log("Hållplats-namn:" + name)
+            document.getElementById("stops").innerHTML += `<p onclick="getId(${id})">   ${name} </p>`;
+            // document.getElementById("stops").innerHTML += `<p> ${stops.StopLocation[i].id} </p>`;
         }
            
     } catch (err) {
@@ -46,47 +52,49 @@ async function nearStops(currentLocation) {
     }
 }
 
-async function departures(id) {
-    console.log("departures ran")
+
+async function departures() {
+    console.log("Hämtar avgång")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
-    // let latitude = 59.5197344;
-    // let longitude = 17.8927437;
-
-    // let latitude = currentLocation.latitude;
-    // console.log(latitude)
-
-    // let longitude = currentLocation.longitude;
-    // console.log(longitude)
-
-    
-    
-    let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`
-
+    // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&format=json
+    let id = 740000782;
+    let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
+    let el =  document.getElementById('departures');
     try {
         let resp = await fetch(URL);
+        console.log("svar " + resp)
         let departures = await resp.json();
-        console.log(departures)
+        console.log( "DEEPARTUTRES: " + departures)
+
+
+        for(departure of departures.Departure) {
+            console.log('avgångar: ')
+            // console.log(departure);
+            console.log(departure.direction);
+
+
+            el.innerHTML += `
+            <p> ${departure.direction}</p>
+            <p> ${departure.name}</p>
+            <p> ${departure.date}</p>
+            <p> ${departure.time}</p>
+            <hr>
+            `
+           
+            console.log(departure.name);
+            console.log(departure.date);
+            console.log(departure.time);
+    }
+
+        return departures;
+        
+
 
     } catch (err) {
         console.log(err)
     }
 }
 
-
-
-
-
-
-
-
-
-/*
-
-
-fetch('http://example.com/movies.json')
-  .then(response => response.json())
-  .then(data => console.log(data));
-
-
-*/
+getLocation()
+departures()

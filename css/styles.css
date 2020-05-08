@@ -16,6 +16,7 @@ button {
     font-weight: 700;
 }
 
-button:hover {
+button:hover, #stops {
     cursor: pointer;
 }
+

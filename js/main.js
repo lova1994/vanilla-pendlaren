@@ -15,11 +15,10 @@ function getLocation() {
 }
 
 
-
 function getId() {
     let id = 740000782;
     console.log("Get id ran")
-    departures(id) // skickar id till departures
+    departures(id)
 }
 
 async function nearStops(currentLocation) {
@@ -79,15 +78,14 @@ async function nearStops(currentLocation) {
 // }
 
 
-async function departures(id) {
+async function departures() {
     console.log("Hämtar avgång")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
     // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&format=json
     
-    
 
-    // let id = 740000782; // Hållplats ID
+    let id = 740000782; // Hållplats ID
     let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
     let el =  document.getElementById('departures');
     try {

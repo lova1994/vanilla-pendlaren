@@ -5,8 +5,6 @@
 //     console.log("Event listener works")
 // }
 
-
-
 function getLocation() {
     console.log("Hämtar din position...")
   if (navigator.geolocation) {
@@ -77,37 +75,15 @@ function addEventsListeners() {
     }
 }
 
-// function addEventsListeners() {
-//     //Hämtar alla stationer med klassen .stops
-//     //Sätter en event listener på varje station 
-//     const pickStation = document.querySelector("#stops");
-//     pickStation.addEventListener('click', (event) => {
-//         //Hämtar stop-id från det elementet man klickade på
-//         const stationID = event.srcElement.getAttribute('stop-id');
-//         console.log("Hämtar stations ID: " + stationID)
-//         departures(stationID)
-//     });
-// }
-
-// function sendId(){
-    
-//     let id = 740000782;
-//     departures(id)
-// }
-
 async function departures(id) {
     console.log("Hämtar avgång...")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
-    const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
-    // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&format=json
-    
+    const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';    
 
-    // let id = 740000782; // Hållplats ID
     let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
     let el =  document.getElementById('departures');
     try {
         let resp = await fetch(URL);
-        // console.log("svar " + resp)
         let departures = await resp.json();        
 
         for(departure of departures.Departure) {
@@ -119,11 +95,7 @@ async function departures(id) {
             <p> ${departure.date}</p>
             <p> ${departure.time}</p>
             <hr>
-            `
-            // console.log(departure.name);
-            // console.log(departure.date);
-            // console.log(departure.time);
-            
+            `            
     }
     console.log(departure.stop)
 
@@ -133,4 +105,3 @@ async function departures(id) {
 }
 
 getLocation()
-// departures()

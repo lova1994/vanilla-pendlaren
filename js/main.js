@@ -1,9 +1,6 @@
-// const testBtn = document.getElementById("testBtn");
-// testBtn.addEventListener('click', departures);
+const testBtn = document.getElementById("testBtn");
+testBtn.addEventListener('click', getLocation);
 
-// function testMe() {
-//     console.log("Event listener works")
-// }
 
 function getLocation() {
     console.log("Hämtar din position...")
@@ -18,7 +15,6 @@ function getLocation() {
   console.log("ERRRROOOORRRRRR!!!")
   }
 }
-
 
 async function nearStops(currentLocation) {
 
@@ -42,7 +38,6 @@ async function nearStops(currentLocation) {
             let stop = stops.StopLocation[i].name;
             document.getElementById("stops").innerHTML += `<p id="myStop" class="stops">  ${stop} </p>
             <button id="pickStation" stop-id="${id}" > Visa avgångar  </button>`;
-
         }
 
         
@@ -103,5 +98,3 @@ async function departures(id) {
         console.log(err)
     }
 }
-
-getLocation()

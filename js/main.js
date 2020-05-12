@@ -1,4 +1,7 @@
-const testBtn = document.getElementById("testBtn");
+const testBtn = document.getElementById("testBtn"),
+ departuresEl =  document.getElementById('departures'),
+ stopsEl = document.getElementById("stops");
+
 testBtn.addEventListener('click', getLocation);
 
 
@@ -12,7 +15,7 @@ function getLocation() {
         }
     )
   } else { 
-  console.log("ERRRROOOORRRRRR!!!")
+  console.log("Något gick fel")
   }
 }
 
@@ -25,8 +28,7 @@ async function nearStops(currentLocation) {
     let latitude = currentLocation.latitude;
     let longitude = currentLocation.longitude;
     let URL = `${baseUrl}key=${apiKey}&originCoordLat=${latitude}&originCoordLong=${longitude}&format=json`
-    // let id = 740000782;
-
+    
     try {
         let resp = await fetch(URL);
         let stops = await resp.json();
@@ -36,20 +38,10 @@ async function nearStops(currentLocation) {
         for (i=0; i < 10; i++) {
             let id = stops.StopLocation[i].id;
             let stop = stops.StopLocation[i].name;
-            document.getElementById("stops").innerHTML += `<p id="myStop" class="stops">  ${stop} </p>
+            stopsEl.innerHTML += `<p id="myStop" class="stops">  ${stop} </p>
             <button id="pickStation" stop-id="${id}" > Visa avgångar  </button>`;
         }
-
         
-
-    // const pickStation = document.getElementById("pickStation");
-
-    // pickStation.addEventListener('click', (event) => {
-    //     const stationID = document.getElementById("myStop").getAttribute('stop-id');
-    //     console.log("Hämtar stations ID: " + stationID)
-    //     departures(stationID)
-    // });
-
     addEventsListeners();
     } catch (err) {
         console.log(err)
@@ -76,21 +68,18 @@ async function departures(id) {
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';    
 
     let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
-    let el =  document.getElementById('departures');
     try {
         let resp = await fetch(URL);
         let departures = await resp.json();        
 
         for(departure of departures.Departure) {
             console.log('Loopar ut alla avgångar...')
-
-            el.innerHTML += `
+            departuresEl.innerHTML += `
             <p> ${departure.direction}</p>
             <p> ${departure.name}</p>
             <p> ${departure.date}</p>
             <p> ${departure.time}</p>
-            <hr>
-            `            
+            <hr>`            
     }
     console.log(departure.stop)
 

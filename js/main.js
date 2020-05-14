@@ -5,47 +5,6 @@ const testBtn = document.getElementById("testBtn"),
 
 testBtn.addEventListener('click', getLocation);
 
-
-
-
-
-// let test = transportTypeEl.value;
-// console.log(test)
-
-
-// function start(){
-//     transportTypeEl.addEventListener("change", pickTransportation, false);
-//     }
-
-// function pickTransportation(){
-//     //option is selected
-//     console.log(transportTypeEl.value);
-// }
-
-// window.addEventListener("load", start, false);
-
-
-/* testar checkbox value */
-
-// function getTransportType() {
-//     var coffee = document.forms[0];
-//     var txt = "";
-//     var i;
-//     for (i = 0; i < coffee.length; i++) {
-//       if (coffee[i].checked) {
-//         txt = txt + coffee[i].value + " ";
-//       }
-//     }
-//     document.getElementById("order").value = "You ordered a coffee with: " + txt;
-//   }
-
-
-
-// document.querySelector('.messageCheckbox').checked;
-
-
-
-
 function getLocation() {
     console.log("Hämtar din position...")
   if (navigator.geolocation) {
@@ -140,8 +99,6 @@ async function departures(id) {
             <hr>`            
     }
 
-
-  
     console.log(departure.stop)
 
     } catch (err) {

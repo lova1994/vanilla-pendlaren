@@ -1,57 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendlaren || GeoLocation API || PWA || Vanilla JS</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
-<body>  
+
+<body>
+
+<h1> Vanilla Pendlaren
+</h1>
 
 
-    <div class="wrapper">
-        <h1>Vanilla Pendlaren </h1>
+     <!--- TESTAR CHECKBOXGREJ-->
+     <!-- <h2> pick a motherfucking transportation bitch</h2>
+     <label>Pendeltåg<input type="checkbox" value="16"></label>
+     <label>Buss<input type="checkbox" value="128"></label>
+<button id="transportBtn"> pick me bitch</button>
+  <hr> -->
+<!-- TESTAR EN TILL -->
 
-    <div class="column">
-        <button id="testBtn"> Hämta min position</button>
-        <h3>Välj en hållplats i närheten </h3>
-        <div id="stops"></div>
-    </div>
-   
- 
-    
-
-    <!-- <p id="demo"></p> -->
-
-
-   
-
-<p id="show-position"></p>
-
-<h2> Avgångar </h2>
-<p id="departures"></p>
-
-
-
-
-<!-- <p> Now get the hållplatser, you fucking cunt.</p>
-
-<button onclick="getLocation()">Get them, Bitch.</button> -->
-
-<p id="show-stops"> </p>
-
-<script>
+<!-- <table id="tblFruits">
+    <tr>
+        <td><input id="chkMango" type="checkbox" value="16"/><label for="chkMango">Pendeltåg</label></td>
+    </tr>
+    <tr>
+        <td><input id="chkApple" type="checkbox" value="128"/><label for="chkApple">Buss</label></td>
+    </tr>
+</table> -->
 
 
 
-</script>
+<div id="transportTypes">
+<input id="chkMango" type="checkbox" value="16"/><label for="chkMango">Pendeltåg</label>
 
-
-<script src="js/main.js"></script>
-
+       <input id="chkApple" type="checkbox" value="128"/><label for="chkApple">Buss</label>
 
 </div>
 
+<br />
+<input type = "button" value = "Get" onclick = "GetSelected()" />
+     <hr>
+
+    <div class="wrapper">
+        
+        <div class="column">
+            <button id="testBtn"> Hämta min position</button>
 
 
-    </html>
+       
+
+
+
+                <!--- SLUTAR HÄR-->
+
+            <!-- <p>Well this was stupid</p>
+            <select id="transportType">
+                <option value="16">Pendeltåg</option>
+                <option value="32" >Tunnelbana</option>
+                <option value="128">Buss</option>
+              </select>
+
+              <p> Färdmedel </p> -->
+
+    
+
+
+            <h3>Välj en hållplats i närheten </h3>
+            <div id="stops"></div>
+        </div>
+
+
+
+
+
+<div class="column">
+
+
+        <h2> Avgångar </h2>
+        <p id="departures"></p>
+    </div>
+
+        <script src="js/main.js"></script>
+
+    </div>
+
+    </body>
+
+</html>

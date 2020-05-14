@@ -1,8 +1,49 @@
 const testBtn = document.getElementById("testBtn"),
  departuresEl =  document.getElementById('departures'),
  stopsEl = document.getElementById("stops");
+ transportTypeEl = document.getElementById("transportType"),
 
 testBtn.addEventListener('click', getLocation);
+
+
+
+
+
+// let test = transportTypeEl.value;
+// console.log(test)
+
+
+// function start(){
+//     transportTypeEl.addEventListener("change", pickTransportation, false);
+//     }
+
+// function pickTransportation(){
+//     //option is selected
+//     console.log(transportTypeEl.value);
+// }
+
+// window.addEventListener("load", start, false);
+
+
+/* testar checkbox value */
+
+// function getTransportType() {
+//     var coffee = document.forms[0];
+//     var txt = "";
+//     var i;
+//     for (i = 0; i < coffee.length; i++) {
+//       if (coffee[i].checked) {
+//         txt = txt + coffee[i].value + " ";
+//       }
+//     }
+//     document.getElementById("order").value = "You ordered a coffee with: " + txt;
+//   }
+
+
+
+// document.querySelector('.messageCheckbox').checked;
+
+
 
 
 function getLocation() {
@@ -62,10 +103,27 @@ function addEventsListeners() {
     }
 }
 
+
+
+
+
+
 async function departures(id) {
     console.log("Hämtar avgång...")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
-    const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';    
+    const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
+
+    // let transportType = checkbox.value
+   
+    departuresEl.innerHTML = '';
+
+    // let transportType = "";
+
+
+    // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&products=16&format=json
+
+
+    // &products=16
 
     let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
     try {
@@ -81,9 +139,39 @@ async function departures(id) {
             <p> ${departure.time}</p>
             <hr>`            
     }
+
+
+  
     console.log(departure.stop)
 
     } catch (err) {
         console.log(err)
     }
 }
+
+
+// getLocation();
+
+function GetSelected() {
+    //Create an Array.
+    let selected = [];
+
+    //Reference the Table.
+    let transportTypes = document.getElementById("transportTypes");
+
+    //Reference all the CheckBoxes in Table.
+    let chks = transportTypes.getElementsByTagName("INPUT");
+
+    // Loop and push the checked CheckBox value in Array.
+    for (var i = 0; i < chks.length; i++) {
+        if (chks[i].checked) {
+            selected.push(chks[i].value);
+        }
+    }
+
+    let numArr = selected.map( x => { 
+        return parseInt(x, 10); 
+      });
+      let totalSum = numArr.reduce((a, b) => a + b, 0);
+      console.log(totalSum)
+};

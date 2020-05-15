@@ -1,11 +1,12 @@
-const testBtn = document.getElementById("testBtn"),
+const getLocationBtn = document.getElementById("getLocationBtn"),
  departuresEl =  document.getElementById('departures'),
- stopsEl = document.getElementById("stops");
+ stopsEl = document.getElementById("stops"),
  transportTypeEl = document.getElementById("transportType"),
  transportTypes = document.getElementById("transportTypes"),
  chks = transportTypes.getElementsByTagName("INPUT"); // OBS! ändra från TagName till nåt annat som är bättre sen!
-
-testBtn.addEventListener('click', getLocation);
+ 
+ 
+ getLocationBtn.addEventListener('click', getLocation);
 
 function getLocation() {
     console.log("Hämtar din position...")
@@ -60,13 +61,10 @@ function addEventsListeners() {
             const stationID = event.srcElement.getAttribute('stop-id');
             console.log("Hämtar stations ID: " + stationID)
             departures(stationID)
+            console.log("addeventlisteners")
         });
     }
 }
-
-
-
-
 
 function pickTransportation() {
     let selected = [];
@@ -80,13 +78,18 @@ function pickTransportation() {
       });
       let totalSum = numArr.reduce((a, b) => a + b, 0);
       console.log(totalSum)
+      return totalSum;
+
 };
 
 
-async function departures(id,transportType) {
+async function departures(id) {
     console.log("Hämtar avgång...")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
+    const transportType = pickTransportation(); // Här får man värdet som returneras från pickTransportation
+    console.log(transportType)
+
 
    
     departuresEl.innerHTML = '';
@@ -116,14 +119,4 @@ async function departures(id,transportType) {
     }
 }
 
-
-
 // getLocation();
-
-
-
-
-
-
-
-

@@ -2,6 +2,8 @@ const testBtn = document.getElementById("testBtn"),
  departuresEl =  document.getElementById('departures'),
  stopsEl = document.getElementById("stops");
  transportTypeEl = document.getElementById("transportType"),
+ transportTypes = document.getElementById("transportTypes"),
+ chks = transportTypes.getElementsByTagName("INPUT"); // OBS! ändra från TagName till nåt annat som är bättre sen!
 
 testBtn.addEventListener('click', getLocation);
 
@@ -66,25 +68,33 @@ function addEventsListeners() {
 
 
 
+function pickTransportation() {
+    let selected = [];
+    for (var i = 0; i < chks.length; i++) {
+        if (chks[i].checked) {
+            selected.push(chks[i].value);
+        }
+    }
+    let numArr = selected.map( x => { 
+        return parseInt(x, 10); 
+      });
+      let totalSum = numArr.reduce((a, b) => a + b, 0);
+      console.log(totalSum)
+};
 
-async function departures(id) {
+
+async function departures(id,transportType) {
     console.log("Hämtar avgång...")
     const apiKey = '92eb7245-c121-4899-90dc-059f68233948'
     const baseUrl = 'https://api.resrobot.se/v2/departureBoard?';
 
-    // let transportType = checkbox.value
    
     departuresEl.innerHTML = '';
 
-    // let transportType = "";
-
-
     // https://api.resrobot.se/v2/departureBoard?key=92eb7245-c121-4899-90dc-059f68233948&id=740000782&products=16&format=json
 
-
-    // &products=16
-
-    let URL = `${baseUrl}key=${apiKey}&id=${id}&format=json`;
+    let URL = `${baseUrl}key=${apiKey}&id=${id}&products=${transportType}&format=json`;
+    console.log(URL)
     try {
         let resp = await fetch(URL);
         let departures = await resp.json();        
@@ -107,28 +117,13 @@ async function departures(id) {
 }
 
 
+
 // getLocation();
 
-function GetSelected() {
-    //Create an Array.
-    let selected = [];
 
-    //Reference the Table.
-    let transportTypes = document.getElementById("transportTypes");
 
-    //Reference all the CheckBoxes in Table.
-    let chks = transportTypes.getElementsByTagName("INPUT");
 
-    // Loop and push the checked CheckBox value in Array.
-    for (var i = 0; i < chks.length; i++) {
-        if (chks[i].checked) {
-            selected.push(chks[i].value);
-        }
-    }
 
-    let numArr = selected.map( x => { 
-        return parseInt(x, 10); 
-      });
-      let totalSum = numArr.reduce((a, b) => a + b, 0);
-      console.log(totalSum)
-};
+
+
+

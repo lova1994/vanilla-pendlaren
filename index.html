@@ -13,26 +13,6 @@
 <h1> Vanilla Pendlaren
 </h1>
 
-
-     <!--- TESTAR CHECKBOXGREJ-->
-     <!-- <h2> pick a motherfucking transportation bitch</h2>
-     <label>Pendeltåg<input type="checkbox" value="16"></label>
-     <label>Buss<input type="checkbox" value="128"></label>
-<button id="transportBtn"> pick me bitch</button>
-  <hr> -->
-<!-- TESTAR EN TILL -->
-
-<!-- <table id="tblFruits">
-    <tr>
-        <td><input id="chkMango" type="checkbox" value="16"/><label for="chkMango">Pendeltåg</label></td>
-    </tr>
-    <tr>
-        <td><input id="chkApple" type="checkbox" value="128"/><label for="chkApple">Buss</label></td>
-    </tr>
-</table> -->
-
-
-
 <div id="transportTypes">
 <input id="chkMango" type="checkbox" value="16"/><label for="chkMango">Pendeltåg</label>
 
@@ -41,52 +21,19 @@
 </div>
 
 <br />
-<input type = "button" value = "Get" onclick = "GetSelected()" />
+<input type="button" value = "Get" onclick = "pickTransportation()" />
      <hr>
-
     <div class="wrapper">
-        
         <div class="column">
-            <button id="testBtn"> Hämta min position</button>
-
-
-       
-
-
-
-                <!--- SLUTAR HÄR-->
-
-            <!-- <p>Well this was stupid</p>
-            <select id="transportType">
-                <option value="16">Pendeltåg</option>
-                <option value="32" >Tunnelbana</option>
-                <option value="128">Buss</option>
-              </select>
-
-              <p> Färdmedel </p> -->
-
-    
-
-
+            <button id="getLocationBtn"> Hämta min position</button>
             <h3>Välj en hållplats i närheten </h3>
             <div id="stops"></div>
         </div>
-
-
-
-
-
 <div class="column">
-
-
         <h2> Avgångar </h2>
         <p id="departures"></p>
     </div>
-
         <script src="js/main.js"></script>
-
     </div>
-
     </body>
-
 </html>
